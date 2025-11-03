@@ -1,0 +1,40 @@
+import { Routes } from '@angular/router';
+import { HomeComponent } from './home/home.component';
+import { PersonasListComponent } from './personas/personas-list/personas-list.component';
+import { PersonasCreateComponent } from './personas/personas-create/personas-create.component';
+import { PersonasEditComponent } from './personas/personas-edit/personas-edit.component';
+import { PersonasDetailsComponent } from './personas/personas-details/personas-details.component';
+import { ProfesionesListComponent } from './profesiones/profesiones-list/profesiones-list.component';
+import { ProfesionesCreateComponent } from './profesiones/profesiones-create/profesiones-create.component';
+import { ProfesionesEditComponent } from './profesiones/profesiones-edit/profesiones-edit.component';
+import { ProfesionesDetailsComponent } from './profesiones/profesiones-details/profesiones-details.component';
+import { TelefonosListComponent } from './telefonos/telefonos-list/telefonos-list.component';
+import { TelefonosCreateComponent } from './telefonos/telefonos-create/telefonos-create.component';
+import { TelefonosEditComponent } from './telefonos/telefonos-edit/telefonos-edit.component';
+import { TelefonosDetailsComponent } from './telefonos/telefonos-details/telefonos-details.component';
+import { EstudiosListComponent } from './estudios/estudios-list/estudios-list.component';
+import { EstudiosCreateComponent } from './estudios/estudios-create/estudios-create.component';
+import { EstudiosEditComponent } from './estudios/estudios-edit/estudios-edit.component';
+import { EstudiosDetailsComponent } from './estudios/estudios-details/estudios-details.component';
+
+export const routes: Routes = [
+  { path: '', component: HomeComponent },
+  { path: 'personas', component: PersonasListComponent },
+  { path: 'personas/create', component: PersonasCreateComponent },
+  { path: 'personas/:id', component: PersonasDetailsComponent },
+  { path: 'personas/:id/edit', component: PersonasEditComponent },
+  { path: 'profesiones', component: ProfesionesListComponent },
+  { path: 'profesiones/create', component: ProfesionesCreateComponent },
+  { path: 'profesiones/:id', component: ProfesionesDetailsComponent },
+  { path: 'profesiones/:id/edit', component: ProfesionesEditComponent },
+  { path: 'telefonos', component: TelefonosListComponent },
+  { path: 'telefonos/create', component: TelefonosCreateComponent },
+  { path: 'telefonos/:id', component: TelefonosDetailsComponent },
+  { path: 'telefonos/:id/edit', component: TelefonosEditComponent },
+  { path: 'estudios', component: EstudiosListComponent },
+  { path: 'estudios/create', component: EstudiosCreateComponent },
+  { path: 'estudios/:idProf/:ccPer', component: EstudiosDetailsComponent },
+  { path: 'estudios/:idProf/:ccPer/edit', component: EstudiosEditComponent },
+  { path: '**', redirectTo: '' }
+];
+
