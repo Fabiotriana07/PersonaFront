@@ -1,5 +1,7 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://neriah-burriest-sentiently.ngrok-free.dev/api'
+  // Usar proxy para desarrollo (evita problemas de CORS)
+  // El proxy redirige /api/* a la URL de ngrok
+  apiUrl: '/api'
 };
 

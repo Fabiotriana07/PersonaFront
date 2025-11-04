@@ -1,8 +1,12 @@
 {
   "/api": {
-    "target": "http://localhost:5204",
-    "secure": false,
-    "changeOrigin": true
+    "target": "https://neriah-burriest-sentiently.ngrok-free.dev",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "headers": {
+      "ngrok-skip-browser-warning": "true"
+    }
   }
 }
 

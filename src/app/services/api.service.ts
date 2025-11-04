@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 
@@ -8,92 +8,109 @@ import { environment } from '../../environments/environment';
 })
 export class ApiService {
   private apiUrl = environment.apiUrl;
+  private headers: HttpHeaders;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    // Configurar headers para ngrok (evitar página de advertencia)
+    this.headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'ngrok-skip-browser-warning': 'true' // Evita la página de advertencia de ngrok
+    });
+  }
+
+  private getOptions() {
+    return { 
+      headers: this.headers,
+      withCredentials: false, // No enviar cookies
+      observe: 'body' as const, // Solo obtener el body de la respuesta
+      responseType: 'json' as const
+    };
+  }
 
   // Personas
   getPersonas(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/personas`);
+    return this.http.get<any[]>(`${this.apiUrl}/personas`, this.getOptions());
   }
 
   getPersonaByCc(cc: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/personas/${cc}`);
+    return this.http.get<any>(`${this.apiUrl}/personas/${cc}`, this.getOptions());
   }
 
   createPersona(persona: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/personas`, persona);
+    return this.http.post<any>(`${this.apiUrl}/personas`, persona, this.getOptions());
   }
 
   updatePersona(cc: number, persona: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/personas/${cc}`, persona);
+    return this.http.put<any>(`${this.apiUrl}/personas/${cc}`, persona, this.getOptions());
   }
 
   deletePersona(cc: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/personas/${cc}`);
+    return this.http.delete<any>(`${this.apiUrl}/personas/${cc}`, this.getOptions());
   }
 
   // Profesiones
   getProfesiones(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/profesiones`);
+    return this.http.get<any[]>(`${this.apiUrl}/profesiones`, this.getOptions());
   }
 
   getProfesionById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/profesiones/${id}`);
+    return this.http.get<any>(`${this.apiUrl}/profesiones/${id}`, this.getOptions());
   }
 
   createProfesion(profesion: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/profesiones`, profesion);
+    return this.http.post<any>(`${this.apiUrl}/profesiones`, profesion, this.getOptions());
   }
 
   updateProfesion(id: number, profesion: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/profesiones/${id}`, profesion);
+    return this.http.put<any>(`${this.apiUrl}/profesiones/${id}`, profesion, this.getOptions());
   }
 
   deleteProfesion(id: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/profesiones/${id}`);
+    return this.http.delete<any>(`${this.apiUrl}/profesiones/${id}`, this.getOptions());
   }
 
   // Teléfonos
   getTelefonos(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/telefonos`);
+    return this.http.get<any[]>(`${this.apiUrl}/telefonos`, this.getOptions());
   }
 
   getTelefonoByNumero(numero: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/telefonos/${numero}`);
+    return this.http.get<any>(`${this.apiUrl}/telefonos/${numero}`, this.getOptions());
   }
 
   createTelefono(telefono: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/telefonos`, telefono);
+    return this.http.post<any>(`${this.apiUrl}/telefonos`, telefono, this.getOptions());
   }
 
   updateTelefono(numero: string, telefono: any): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/telefonos/${numero}`, telefono);
+    return this.http.put<any>(`${this.apiUrl}/telefonos/${numero}`, telefono, this.getOptions());
   }
 
   deleteTelefono(numero: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/telefonos/${numero}`);
+    return this.http.delete<any>(`${this.apiUrl}/telefonos/${numero}`, this.getOptions());
   }
 
   // Estudios
   getEstudios(): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/estudios`);
+    return this.http.get<any[]>(`${this.apiUrl}/estudios`, this.getOptions());
   }
 
   getEstudioByPersona(ccPersona: number): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/estudios/persona/${ccPersona}`);
+    return this.http.get<any[]>(`${this.apiUrl}/estudios/persona/${ccPersona}`, this.getOptions());
   }
 
   createEstudio(estudio: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/estudios`, estudio);
+    return this.http.post<any>(`${this.apiUrl}/estudios`, estudio, this.getOptions());
   }
 
   updateEstudio(idProf: number, ccPer: number, estudio: any): Observable<any> {
     // El PUT de estudios no requiere parámetros en la URL, solo el body
-    return this.http.put<any>(`${this.apiUrl}/estudios`, estudio);
+    return this.http.put<any>(`${this.apiUrl}/estudios`, estudio, this.getOptions());
   }
 
   deleteEstudio(idProf: number, ccPer: number): Observable<any> {
-    return this.http.delete<any>(`${this.apiUrl}/estudios/${idProf}/${ccPer}`);
+    return this.http.delete<any>(`${this.apiUrl}/estudios/${idProf}/${ccPer}`, this.getOptions());
   }
 }
 

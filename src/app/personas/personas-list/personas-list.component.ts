@@ -83,7 +83,16 @@ export class PersonasListComponent implements OnInit {
         this.loading = false;
       },
       error: (err) => {
-        this.error = 'Error al cargar personas: ' + err.message;
+        console.error('Error completo:', err);
+        let errorMessage = 'Error al cargar personas: ';
+        if (err.status === 0) {
+          errorMessage += 'No se pudo conectar al servidor. Verifica que la API esté corriendo y accesible.';
+        } else if (err.error) {
+          errorMessage += err.error.message || err.message || JSON.stringify(err.error);
+        } else {
+          errorMessage += err.message || 'Error desconocido';
+        }
+        this.error = errorMessage;
         this.loading = false;
       }
     });
