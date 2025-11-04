@@ -56,7 +56,7 @@ import { RouterLink } from '@angular/router';
             <div class="card-body">
               <h5 class="card-title">Documentación API</h5>
               <p class="card-text">Accede a la documentación interactiva de Swagger</p>
-              <a href="http://localhost:5204/swagger" target="_blank" class="btn btn-success">Ver Swagger</a>
+              <a href="https://neriah-burriest-sentiently.ngrok-free.dev/swagger" target="_blank" class="btn btn-success">Ver Swagger</a>
             </div>
           </div>
         </div>

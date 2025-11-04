@@ -1,6 +1,6 @@
 # Person API - Frontend Angular
 
-Frontend desarrollado en Angular para consumir la API REST de Person API.
+Frontend desarrollado en Angular 18 para consumir la API REST de Person API.
 
 ## 🚀 Inicio Rápido
 
@@ -42,10 +42,13 @@ src/
 
 ### Cambiar URL de la API
 
-Edita `src/app/services/api.service.ts`:
+Edita `src/environments/environment.ts`:
 
 ```typescript
-private apiUrl = 'http://TU_IP:5204/api';
+export const environment = {
+  production: false,
+  apiUrl: 'http://TU_IP:5204/api'
+};
 ```
 
 ### Proxy para Desarrollo
